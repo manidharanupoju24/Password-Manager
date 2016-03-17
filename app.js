@@ -160,7 +160,8 @@ function getAccount (accountName,masterPassword){
 console.log(facebookAccount);*/
 
 if(command === 'create'){
-	var createdAccount = createAccount({
+	try{
+		var createdAccount = createAccount({
 		name : argv.name,
 		username : argv.username,
 		password : argv.password,
@@ -169,9 +170,13 @@ if(command === 'create'){
 	console.log(createdAccount);
 	console.log('Account added into the database');
 	console.log('Use get command along with the account name to fetch the data');
+	}catch (e){
+		console.log('Unable to create acount');
+	}
 }
 else if(command === 'get'){
-	var fetchedAccount = getAccount(argv.name, argv.masterPassword);
+	try{
+		var fetchedAccount = getAccount(argv.name, argv.masterPassword);
 
 	if(typeof fetchedAccount === 'undefined'){
 	console.log('Account not found');
@@ -180,7 +185,9 @@ else if(command === 'get'){
 		console.log('Account found');
 		console.log(fetchedAccount);
 	}
+	} catch (e){ 
+		console.log('Unable to fetch account');
+	}
 
 }
-else console.log('invalid command');
 
